@@ -1,0 +1,15 @@
+
+{
+  global:
+  extern "C"
+  {
+    kws_init;
+    kws_start;
+    kws_destroy;
+    kws_process;
+		kws_stop;
+		kws_get_version;
+  };
+  local:
+    *;
+};

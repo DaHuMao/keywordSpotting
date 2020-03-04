@@ -1,0 +1,12 @@
+_silence_
+_unknown_
+yes
+no
+up
+down
+stop
+nihaoxiaoya
+on
+off
+left
+right
