@@ -1,4 +1,3 @@
-// Copyright horizon 2019.11.26
 #ifndef EXAMPLE_AUDIOFILE_H_
 
 #define EXAMPLE_AUDIOFILE_H_

@@ -42,24 +42,34 @@ char firstCharNotSpace(const std::string& str) {
   return ' ';
 }
 
-int32_t strtos(std::string str, uint16_t* _num) {
-  uint16_t& num = *_num;
+int32_t strtous(std::string str, uint16_t* _num) {
+  uint16_t num = 0;
   if (str.empty() || (str.size() > 1 && str[0] == '0')) return -1;
-  num = 0;
   for (int i = 0; i < str.size(); ++i) {
     if (str[i] < '0' || str[i] > '9') return -1;
     num = num * 10 + str[i] - '0';
   }
+  *_num=num;
   return 0;
 }
 int32_t strtoi(std::string str, int32_t* _num) {
-  int32_t& num = *_num;
+  int32_t num = 0;
   if (str.empty() || (str.size() > 1 && str[0] == '0')) return -1;
-  num = 0;
   for (int i = 0; i < str.size(); ++i) {
     if (str[i] < '0' || str[i] > '9') return -1;
     num = num * 10 + str[i] - '0';
   }
+  *_num=num;
+  return 0;
+}
+int32_t strtou(std::string str, uint32_t* _num) {
+  uint32_t num = 0;
+  if (str.empty() || (str.size() > 1 && str[0] == '0')) return -1;
+  for (int i = 0; i < str.size(); ++i) {
+    if (str[i] < '0' || str[i] > '9') return -1;
+    num = num * 10 + str[i] - '0';
+  }
+  *_num=num;
   return 0;
 }
 /*std::vector<std::string> strtof_split(const std::string& str){

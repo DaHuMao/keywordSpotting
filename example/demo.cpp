@@ -1,4 +1,3 @@
-// Copyright horizon 2019.11.26
 #include <inttypes.h>
 #include <stdarg.h>
 #include <stdint.h>
@@ -65,7 +64,7 @@ int main(int argc, char* argv[]) {
     exit(0);
   }
   char *fn, *data, *cfg_path;
-  int mode = 0;
+  int sample_rate = 48000, input_channels=1;
   while (*argv) {
     if (strcmp(*argv, "-i") == 0) {
       argv++;
@@ -79,10 +78,14 @@ int main(int argc, char* argv[]) {
       argv++;
       cfg_path = *argv;
       printf("cfg file path is %s\n", cfg_path);
-    } else if (strcmp(*argv, "-m") == 0) {
+    } else if (strcmp(*argv, "-sample_rate") == 0) {
       argv++;
-      mode = atoi(*argv);
-      printf("mode is %d\n", mode);
+      sample_rate = atoi(*argv);
+      printf("sample_rate is %d\n", sample_rate);
+    } else if (strcmp(*argv,"-input_channels") == 0){
+      argv++;
+      input_channels = atoi(*argv);
+      printf("input_channels is %d \n",input_channels);
     }
     if (*argv) {
       argv++;
@@ -92,12 +95,12 @@ int main(int argc, char* argv[]) {
   int len;
   int step, pos, n;
 
-  kws_cfg.input_channels = 6;
+  kws_cfg.input_channels = input_channels;
 
 
   kws_cfg.config_file_path = cfg_path;
 
-  kws_cfg.sample_rate = 48000;
+  kws_cfg.sample_rate = sample_rate;
 
   kws_cfg.data_bit_wide = 2;
 
@@ -124,7 +127,7 @@ int main(int argc, char* argv[]) {
   }
 #endif
   pos = 0;
-  step = 32 * 16 * kws_cfg.input_channels;
+  step = 30 * kws_cfg.sample_rate * kws_cfg.input_channels * 2 / 1000;
   char* audio_buffer = new char[step];
   int read_size = 0;
   int numCir = 0;

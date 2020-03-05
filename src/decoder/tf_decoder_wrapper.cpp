@@ -62,7 +62,7 @@ CODE_STATUS tf_decoder_wrapper::init_decoder(
   if(strHandle::strtof(opc.getvalue("detection_threshold"),&detection_threshold) == 0){
     LOGI_T(DECODERTAG)<<"set detection_threshold: "<<detection_threshold;
   }
-  if(strHandle::strtoi(opc.getvalue("sample_rate"),&sample_rate) == 0){
+  if(strHandle::strtou(opc.getvalue("sample_rate"),&sample_rate) == 0){
     LOGI_T(DECODERTAG)<<"set sample_rate: "<<sample_rate;
   }
 

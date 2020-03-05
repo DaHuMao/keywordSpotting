@@ -10,8 +10,9 @@ void DropCharacter(std::string* str, char c);
 std::string IgnorCharacter(const std::string& str, char c);
 std::vector<std::string> splitString(const std::string& _str, char c);
 char firstCharNotSpace(const std::string& str);
-int32_t strtos(std::string str, uint16_t* num);
+int32_t strtous(std::string str, uint16_t* num);
 int32_t strtoi(std::string str, int32_t* num);
+int32_t strtou(std::string str, uint32_t* num);
 int32_t strtof(std::string _str, float* _num);
 class opre_config {
  public:

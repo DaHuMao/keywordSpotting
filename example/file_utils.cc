@@ -2,17 +2,6 @@
 // Created by 崔学成 on 2019-06-12.
 //
 
-/*
- * Copyright (c) 2019 horizon.ai.
- *
- * Unpublished copyright. All rights reserved. This material contains
- * proprietary information that should be used or copied only within
- * horizon.ai, except with written permission of horizon.ai.
- * @author: 崔学成
- * @file: file_utils.cc
- * @date: 2019-06-12
- * @brief:
- */
 #include "file_utils.h"
 #include <dirent.h>
 #include <sys/stat.h>
