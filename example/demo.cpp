@@ -51,6 +51,9 @@ char* file_read_buf(char* fn, int* n) {
   return p;
 }
 
+void wake_up_callback_function(const kws_data_t* ptr,void* param){
+  system("play ../wav/wake_up.wav");
+}
 
 
 FILE* file;
@@ -97,6 +100,9 @@ int main(int argc, char* argv[]) {
 
   kws_cfg.input_channels = input_channels;
 
+  kws_cfg.wakeup_callback_func = wake_up_callback_function;
+
+  kws_cfg.event_callback_func = nullptr;
 
   kws_cfg.config_file_path = cfg_path;
 
@@ -145,7 +151,7 @@ int main(int argc, char* argv[]) {
     }
     while ((read_size = fread(audio_buffer, sizeof(char), step, file)) > 0) {
       kws_process(audio_buffer,read_size);
-      usleep(16  * 1000 );
+      usleep(30  * 1000 );
     }
     numCir++;
     fclose(file);

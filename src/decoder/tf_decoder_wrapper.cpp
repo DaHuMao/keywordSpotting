@@ -7,6 +7,7 @@
 //FILE* fout2=fopen("./out2.pcm","wb+");
 #define DECODERTAG "TF_DECODER"
 namespace kws_ztx {
+  uint64_t tf_decoder_wrapper::_wake_up_times=0;
 int64_t time_ave=0;
 customDataBase *tf_decoder_wrapper::_custom_data = nullptr;
 enginCallbackFunc tf_decoder_wrapper::speechCallback = nullptr;
@@ -225,8 +226,14 @@ CODE_STATUS tf_decoder_wrapper::decoder_data_proc(){
       return CODE_STATUS::kCODE_ERROR;
     }
     if(is_new_command){
-      if(found_command != "_silence_")
-        LOGI_T(DECODERTAG) << (frame_num-1) * clip_stride_ms << " ms: " << found_command << " : " << score;
+     // if(found_command != "_silence_")
+        LOGI_T(DECODERTAG) << (frame_num-1) * clip_stride_ms << " ms: " << found_command << " : "\
+          <<score; 
+        if(found_command == "nihaomiya" && nullptr != _cfg->wakeup_callback_func){
+          _cfg->wakeup_callback_func(nullptr,nullptr);
+        LOGI_T(DECODERTAG) << (frame_num-1) * clip_stride_ms << " ms: " << found_command << " : " 
+          << score << "  times: "<<++_wake_up_times ;
+        }
     }
     time_ave = time_ave + (getCurrentTime() - start);
   }
@@ -307,8 +314,9 @@ int  tf_decoder_wrapper::runrun(){
 
     if (is_new_command ) {
      // all_found_words.push_back({found_command, current_time_ms});
-      if(found_command != "_silence_")
-        std::cout<< current_time_ms << "ms: " << found_command << ": " << score << std::endl;
+      if(found_command == "nihaomiya")
+        std::cout<< current_time_ms << "ms: " << found_command << ": " << score \
+          <<++_wake_up_times<< std::endl;
     }
   }
 }
